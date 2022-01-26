@@ -11,7 +11,7 @@ export default function LoginPage(props) {
     return (
         <div className="container">
             <h1>Welcome to the Login Page!</h1>
-        <form onSubmit={e => { e.preventDefault();  store.dispatch({type: "DO_LOGIN",userName: e.target[0].value, password: e.target[1].value}); }}>
+        <form onSubmit={e => { e.preventDefault();  store.dispatch({type: "DO_LOGIN", userName: e.target[0].value, password: e.target[1].value}); }}>
             <div className="formElem"> 
                 <label htmlFor="userName">Username: </label>
                 <input type="text" id="userName" name="userName" />
