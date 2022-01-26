@@ -13,4 +13,4 @@ services:
     container_name: "login_server"
     image: "nginx"
     ports:
-    - 1234:8080
+    - 1234:80
