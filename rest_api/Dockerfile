@@ -1,5 +1,4 @@
 FROM node
 WORKDIR /app
 COPY . .
-RUN npm install 
-RUN node index.js
+CMD npm install && node index.js

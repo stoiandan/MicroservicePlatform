@@ -14,9 +14,13 @@ services:
     - 27017:27017
   
   app:
+    tty: true
+    depends_on:
+    - db
     container_name: "node_app"
     build: ./rest_api
-    tty: true
+    ports:
+    - 1945:3000
 
   login:
     container_name: "login_server"
