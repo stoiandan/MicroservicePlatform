@@ -4,17 +4,12 @@ const Hapi = require('@hapi/hapi');
 const {MongoClient} = require('mongodb');
 
 const CONNECTION_URL =  "mongodb://dan:userpassword@db:27017/app_db";
+const client = new MongoClient(CONNECTION_URL);
+
 
 
 async function connect() {
-    const client = new MongoClient(CONNECTION_URL);
-
-    try {
-        await client.connect();
-    } catch (e) {
-        console.error(e);
-        throw `Could not connect to MongoDB! Fail ${e}`;
-    }
+    await client.connect();
     console.log(`Connection to mongo succeded! Now running on ${CONNECTION_URL} `);
 }
 
@@ -29,8 +24,11 @@ const init = async () => {
         method: 'GET',
         path: '/',
         handler: async (request, h) => {
+            if(client.topology.isConnected()) {
+                return h.response().code(200)
+            }
+            return h.response().code(404)
 
-            return 'Hello World!';
         }
     });
 
