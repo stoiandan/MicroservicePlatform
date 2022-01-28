@@ -43,7 +43,7 @@ export default function LoginPage(props) {
     
         if (userName === "user" && password === "admin") {
             setloginErrorMessage("");
-           const response = await fetch("google.com");
+           const response = await fetch("http://localhost:1945");
     
            const code = response.status;
     
