@@ -61,6 +61,30 @@ const init = async () => {
         }
     });
 
+    server.route({
+        options: {
+            cors: {
+                origin : ['*']
+            }
+        },
+        method: 'GET',
+        path: '/aggregate',
+        handler: async (request, h) => {
+            const persons = client.db("app_db").collection("person");
+            const randomName = names[Math.floor(Math.random()*DATA_SIZE)];
+            const pipeline = [
+                { $match: { name: randomName } },
+            ];
+            let data = [];
+            var t0 = performance.now();
+            for await (const doc of persons.aggregate(pipeline)) {
+                data.push(doc);
+            }
+            var t1 = performance.now();
+            return JSON.stringify(t1 - t0);
+        }
+    });
+
     await server.start();
     console.log('Server running on %s', server.info.uri);
 };

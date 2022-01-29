@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 
 
 export default function DataPage(props) {
     const [data, setData] = useState({name: "no name", age: 0});
+    const [time, setTime] = useState(0);
+    const navigate = useNavigate();
     useEffect(() =>{
         (async () => {
             setData(await getPersonAsync());
@@ -17,6 +20,7 @@ export default function DataPage(props) {
                 <ul>
                     <li>
                         <input type="button" value="Generate Random data" onClick={async () => setData( await getPersonAsync())}/>
+                        <input type="button" value="Get time to aggreate" onClick={() =>  navigate('/aggregate')}/>
                     </li>
                 </ul>
             </nav>
@@ -35,6 +39,8 @@ async function getPersonAsync() {
     const str = new TextDecoder().decode(obj.value);
     return JSON.parse(str);
 }
+
+
 
 
 

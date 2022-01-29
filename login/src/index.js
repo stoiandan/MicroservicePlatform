@@ -6,6 +6,7 @@ import LoginPage from './components/login'
 
 import DataPage from './components/dataPage';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import AggregationPage from './components/aggregationPage';
 
 
 ReactDOM.render(
@@ -15,6 +16,7 @@ ReactDOM.render(
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/data" element={<DataPage />} />
+          <Route path="/aggregate" element={<AggregationPage />} />
         </Routes>
       </Router>
     </Provider>
