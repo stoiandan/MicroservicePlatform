@@ -51,11 +51,13 @@ const init = async () => {
         method: 'POST',
         path: '/',
         handler: async (request, h) => {
+            const persons = client.db("app_db").collection("person");
             const nameIndex = Math.floor(Math.random()*DATA_SIZE);
             const ageIndex = Math.floor(Math.random()*DATA_SIZE);
             const person = { name: names[nameIndex], age: ages[ageIndex] };
-            client.db("localDb").collection("person").insertOne(person);
-            return client.db("localDb").collection("person").find({ name: names[nameIndex] });
+            await persons.insertOne(person);
+            return JSON.stringify(await persons
+                                                .findOne({ name: names[nameIndex], age: ages[ageIndex]}, { projection: { _id: 0, name: 1, age: 1 }}));
         }
     });
 
